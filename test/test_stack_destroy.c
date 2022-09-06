@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   test_stack_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 14:01:13 by gasouza          ###   ########.fr       */
+/*   Created: 2022/09/06 11:20:15 by gasouza           #+#    #+#             */
+/*   Updated: 2022/09/06 14:09:00 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "unity_fixture.h"
+#include "push_swap.h"
 
-#include <stdlib.h>
+TEST_GROUP(stack_destroy);
 
-typedef struct s_node
+TEST_SETUP(stack_destroy)
 {
-	unsigned int	value;
-	struct s_node	*next;
-}	t_node;
+}
 
-typedef struct s_stack
+TEST_TEAR_DOWN(stack_destroy)
 {
-	t_node	*items;
-}	t_stack;
+}
 
-t_stack	*stack_create(void);
-void	stack_destroy(t_stack **stack);
+TEST(stack_destroy, Destroy)
+{
+	t_stack	*stack = stack_create();
 
-#endif
+	TEST_ASSERT_NOT_NULL(stack);
+
+	stack_destroy(&stack);
+	TEST_ASSERT_NULL(stack);
+}
+
+TEST_GROUP_RUNNER(stack_destroy)
+{
+	RUN_TEST_CASE(stack_destroy, Destroy);
+}

@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   stack_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 14:01:13 by gasouza          ###   ########.fr       */
+/*   Created: 2022/09/06 14:01:58 by gasouza           #+#    #+#             */
+/*   Updated: 2022/09/06 14:07:30 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-#include <stdlib.h>
-
-typedef struct s_node
+static void	node_destroy(t_node *node)
 {
-	unsigned int	value;
-	struct s_node	*next;
-}	t_node;
+	if (!node)
+		return ;
+	if (node->next)
+		node_destroy(node->next);
+	free(node->next);
+	free(node);
+}
 
-typedef struct s_stack
+void	stack_destroy(t_stack **stack)
 {
-	t_node	*items;
-}	t_stack;
+	if (!stack || !*stack)
+		return ;
 
-t_stack	*stack_create(void);
-void	stack_destroy(t_stack **stack);
-
-#endif
+	node_destroy((*stack)->items);
+	free((*stack));
+	(*stack) = NULL;
+}
