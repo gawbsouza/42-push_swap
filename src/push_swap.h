@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 19:51:12 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/06 15:14:37 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ typedef struct s_stack
 
 t_stack	*stack_create(void);
 void	stack_destroy(t_stack **stack);
+void	stack_push(t_stack *stack, unsigned int value);
 
 #endif
