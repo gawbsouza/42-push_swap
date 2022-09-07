@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:00:45 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 14:03:52 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/07 16:52:32 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static	void	runAllTests(void)
 	RUN_TEST_GROUP(sb);
 	RUN_TEST_GROUP(ss);
 	RUN_TEST_GROUP(pa);
+	RUN_TEST_GROUP(pb);
 }
 
 int	main(int argc, const char **argv)

@@ -6,14 +6,14 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:47:51 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/07 14:02:34 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/07 16:54:57 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_D		= ./src
 SRCS		+= stack_create.c stack_destroy.c stack_push.c stack_pop.c
 SRCS		+= stack_swap.c stack_rotate_up.c stack_rotate_down.c
-SRCS		+= pswap_create.c pswap_destroy.c sa.c sb.c ss.c pa.c
+SRCS		+= pswap_create.c pswap_destroy.c sa.c sb.c ss.c pa.c pb.c
 OBJS		= $(addprefix $(SRC_D)/, $(SRCS:.c=.o)) 
 
 LINKER		= gcc
