@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AllTests.c                                         :+:      :+:    :+:   */
+/*   test_pswap_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 12:00:45 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 12:34:22 by gasouza          ###   ########.fr       */
+/*   Created: 2022/09/07 12:03:06 by gasouza           #+#    #+#             */
+/*   Updated: 2022/09/07 12:07:08 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unity_fixture.h"
+#include "push_swap.h"
 
-static	void	runAllTests(void)
+TEST_GROUP(pswap_destroy);
+
+TEST_SETUP(pswap_destroy)
 {
-	RUN_TEST_GROUP(stack_create);
-	RUN_TEST_GROUP(stack_destroy);
-	RUN_TEST_GROUP(stack_push);
-	RUN_TEST_GROUP(stack_pop);
-	RUN_TEST_GROUP(stack_swap);
-	RUN_TEST_GROUP(stack_rotate_up);
-	RUN_TEST_GROUP(stack_rotate_down);
-	RUN_TEST_GROUP(pswap_create);
-	RUN_TEST_GROUP(pswap_destroy);
 }
 
-int	main(int argc, const char **argv)
+TEST_TEAR_DOWN(pswap_destroy)
 {
-	return UnityMain(argc, argv, runAllTests);
+}
+
+TEST(pswap_destroy, Destroy)
+{
+	t_pswap *ps = pswap_create(NULL, NULL);
+
+	TEST_ASSERT_NOT_NULL(ps);
+
+	pswap_destroy(&ps);
+
+	TEST_ASSERT_NULL(ps);
+}
+
+TEST_GROUP_RUNNER(pswap_destroy)
+{
+	RUN_TEST_CASE(pswap_destroy, Destroy);
 }
