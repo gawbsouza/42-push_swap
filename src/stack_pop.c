@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   stack_pop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 16:35:15 by gasouza          ###   ########.fr       */
+/*   Created: 2022/09/06 16:35:41 by gasouza           #+#    #+#             */
+/*   Updated: 2022/09/06 21:35:43 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-
-typedef struct s_node
+t_node	*stack_pop(t_stack *stack)
 {
-	unsigned int	value;
-	struct s_node	*next;
-}	t_node;
+	t_node	*node;
 
-typedef struct s_stack
-{
-	t_node	*items;
-}	t_stack;
-
-t_stack	*stack_create(void);
-void	stack_destroy(t_stack **stack);
-void	stack_push(t_stack *stack, unsigned int value);
-t_node	*stack_pop(t_stack *stack);
-
-#endif
+	if (!stack)
+		return (NULL);
+	node = stack->items;
+	if (node)
+		stack->items = node->next;
+	node->next = NULL;
+	return (node);
+}
