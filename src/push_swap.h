@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 12:49:01 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/07 13:17:20 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	stack_rotate_down(t_stack *stack);
 t_pswap	*pswap_create(t_stack *a, t_stack *b);
 void	pswap_destroy(t_pswap **pswap);
 void	sa(t_pswap *pswap);
+void	sb(t_pswap *pswap);
 
 #endif
