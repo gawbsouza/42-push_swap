@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:49:37 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 13:11:29 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/07 13:24:44 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static t_pswap *ps;
 
 TEST_SETUP(sa)
 {
-	pswap_destroy(&ps);
 }
 
 TEST_TEAR_DOWN(sa)
 {
+	pswap_destroy(&ps);
 }
 
 TEST(sa, WithNullStacks)
