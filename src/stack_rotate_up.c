@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:40:46 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 10:58:00 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/07 11:24:29 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	stack_rotate_up(t_stack *stack)
 	if (!stack || !stack->items || !stack->items->next)
 		return ;
 	last = stack->items;
-	while(last->next)
+	while (last->next)
 		last = last->next;
 	first = stack->items;
 	stack->items = first->next;
