@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   stack_swap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 21:44:40 by gasouza          ###   ########.fr       */
+/*   Created: 2022/09/06 21:45:05 by gasouza           #+#    #+#             */
+/*   Updated: 2022/09/06 22:05:56 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-
-typedef struct s_node
+void	stack_swap(t_stack *stack)
 {
-	unsigned int	value;
-	struct s_node	*next;
-}	t_node;
+	t_node	*tmp;
 
-typedef struct s_stack
-{
-	t_node	*items;
-}	t_stack;
-
-t_stack	*stack_create(void);
-void	stack_destroy(t_stack **stack);
-void	stack_push(t_stack *stack, unsigned int value);
-t_node	*stack_pop(t_stack *stack);
-void	stack_swap(t_stack *stack);
-
-#endif
+	if (!stack || !stack->items || !stack->items->next)
+		return ;
+	tmp = stack->items->next;
+	stack->items->next = tmp->next;
+	tmp->next = stack->items;
+	stack->items = tmp;
+}
