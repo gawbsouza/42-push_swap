@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 17:12:22 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/07 17:28:33 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ void	pb(t_pswap *pswap);
 void	ra(t_pswap *pswap);
 void	rb(t_pswap *pswap);
 void	rr(t_pswap *pswap);
+void	rra(t_pswap *pswap);
+void	rrb(t_pswap *pswap);
+void	rrr(t_pswap *pswap);
 
 #endif
