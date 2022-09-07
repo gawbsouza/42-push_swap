@@ -9,6 +9,7 @@ static	void	runAllTests(void)
 	RUN_TEST_GROUP(stack_swap);
 	RUN_TEST_GROUP(stack_rotate_up);
 	RUN_TEST_GROUP(stack_rotate_down);
+	RUN_TEST_GROUP(pswap_create);
 }
 
 int	main(int argc, const char **argv)
