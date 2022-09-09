@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:20:15 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 19:47:54 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 10:23:08 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,6 @@
 TEST_GROUP(stack_destroy);
 
 static t_stack *stack;
-
-static t_node *node_create(unsigned int value)
-{
-	t_node *node;
-	
-	node = (t_node *) malloc(sizeof(t_node));
-	if (node)
-	{
-		node->value = value;
-		node->next = NULL;
-	}
-	return (node);
-}
-
 
 TEST_SETUP(stack_destroy)
 {
@@ -43,33 +29,36 @@ TEST_TEAR_DOWN(stack_destroy)
 	TEST_ASSERT_NULL(stack);
 }
 
-
-TEST(stack_destroy, StackWithOneNode)
+TEST(stack_destroy, StackWithNoItem)
 {
-	t_node *node = node_create(21);
-	
-	TEST_ASSERT_NOT_NULL(stack);
-	TEST_ASSERT_NOT_NULL(node);
-	TEST_ASSERT_EQUAL_INT(21, node->value);
-
-	stack->items = node;
+	TEST_ASSERT_EQUAL_INT(0, stack->size);
 }
 
-TEST(stack_destroy, StackWithMultiNode)
+TEST(stack_destroy, StackWithOneItem)
 {
-	t_node *node1 = node_create(21);
-	t_node *node2 = node_create(42);
-	
-	TEST_ASSERT_NOT_NULL(stack);
-	TEST_ASSERT_NOT_NULL(node1);
-	TEST_ASSERT_NOT_NULL(node2);
+	stack_push(stack, 21);
+	TEST_ASSERT_EQUAL_INT(1, stack->size);
+}
 
-	stack->items = node1;
-	stack->items->next = node2;
+TEST(stack_destroy, StackWithTwoItems)
+{
+	stack_push(stack, 21);
+	stack_push(stack, 42);
+	TEST_ASSERT_EQUAL_INT(2, stack->size);
+}
+
+TEST(stack_destroy, StackWithMultiItems)
+{
+	stack_push(stack, 21);
+	stack_push(stack, 42);
+	stack_push(stack, 64);
+	TEST_ASSERT_EQUAL_INT(3, stack->size);
 }
 
 TEST_GROUP_RUNNER(stack_destroy)
 {
-	RUN_TEST_CASE(stack_destroy, StackWithOneNode);
-	RUN_TEST_CASE(stack_destroy, StackWithMultiNode);
+	RUN_TEST_CASE(stack_destroy, StackWithNoItem);
+	RUN_TEST_CASE(stack_destroy, StackWithOneItem);
+	RUN_TEST_CASE(stack_destroy, StackWithTwoItems);
+	RUN_TEST_CASE(stack_destroy, StackWithMultiItems);
 }

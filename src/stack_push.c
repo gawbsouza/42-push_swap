@@ -6,13 +6,13 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:04:50 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 15:30:43 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 08:49:08 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_node	*node_create(unsigned int value)
+static t_node	*node_create(int value)
 {
 	t_node	*node;
 
@@ -25,7 +25,7 @@ static t_node	*node_create(unsigned int value)
 	return (node);
 }
 
-void	stack_push(t_stack *stack, unsigned int value)
+void	stack_push(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
@@ -36,5 +36,8 @@ void	stack_push(t_stack *stack, unsigned int value)
 	{
 		new_node->next = stack->items;
 		stack->items = new_node;
+		if (!stack->last)
+			stack->last = new_node;
+		stack->size++;
 	}
 }

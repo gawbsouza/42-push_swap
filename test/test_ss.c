@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:49:37 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 13:51:08 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:13:57 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ static t_pswap *ps;
 
 TEST_SETUP(ss)
 {
-	ps = pswap_create(stack_create(), stack_create());
+	ps = pswap_create();
 
 	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_NOT_NULL(ps->a);
-	TEST_ASSERT_NOT_NULL(ps->b);
 }
 
 TEST_TEAR_DOWN(ss)
@@ -31,20 +29,16 @@ TEST_TEAR_DOWN(ss)
 	pswap_destroy(&ps);
 }
 
-TEST(ss, WithNullStacks)
+TEST(ss, WithEmptyStacks)
 {
-	t_pswap *ps = pswap_create(NULL, NULL);
-
-	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_NULL(ps->a);
-	TEST_ASSERT_NULL(ps->b);
+	TEST_ASSERT_EQUAL_INT(0, ps->a->size);
+	TEST_ASSERT_EQUAL_INT(0, ps->b->size);
 
 	ss(ps);
 	
-	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_NULL(ps->a);
-	TEST_ASSERT_NULL(ps->b);
-
+	TEST_ASSERT_EQUAL_INT(0, ps->a->size);
+	TEST_ASSERT_EQUAL_INT(0, ps->b->size);
+	
 	pswap_destroy(&ps);
 }
 
@@ -55,9 +49,8 @@ TEST(ss, WithOneItem)
 	
 	ss(ps);
 	
-	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_EQUAL_INT(21, ps->a->items->value);
-	TEST_ASSERT_EQUAL_INT(51, ps->b->items->value);
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(51, stack_pop(ps->b));
 }
 
 TEST(ss, WithTwoItems)
@@ -70,12 +63,11 @@ TEST(ss, WithTwoItems)
 	
 	ss(ps);
 	
-	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_EQUAL_INT(21, ps->a->items->value);
-	TEST_ASSERT_EQUAL_INT(42, ps->a->items->next->value);
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(ps->a));
 
-	TEST_ASSERT_EQUAL_INT(51, ps->b->items->value);
-	TEST_ASSERT_EQUAL_INT(102, ps->b->items->next->value);
+	TEST_ASSERT_EQUAL_INT(51, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(102, stack_pop(ps->b));
 }
 
 TEST(ss, WithMultiItems)
@@ -90,19 +82,18 @@ TEST(ss, WithMultiItems)
 	
 	ss(ps);
 	
-	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_EQUAL_INT(42, ps->a->items->value);
-	TEST_ASSERT_EQUAL_INT(64, ps->a->items->next->value);
-	TEST_ASSERT_EQUAL_INT(21, ps->a->items->next->next->value);
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(64, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(ps->a));
 
-	TEST_ASSERT_EQUAL_INT(102, ps->b->items->value);
-	TEST_ASSERT_EQUAL_INT(154, ps->b->items->next->value);
-	TEST_ASSERT_EQUAL_INT(51, ps->b->items->next->next->value);
+	TEST_ASSERT_EQUAL_INT(102, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(154, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(51, stack_pop(ps->b));
 }
 
 TEST_GROUP_RUNNER(ss)
 {
-	RUN_TEST_CASE(ss, WithNullStacks);
+	RUN_TEST_CASE(ss, WithEmptyStacks);
 	RUN_TEST_CASE(ss, WithOneItem);
 	RUN_TEST_CASE(ss, WithTwoItems);
 	RUN_TEST_CASE(ss, WithMultiItems);

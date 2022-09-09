@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:03:06 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 12:07:08 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 11:21:45 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ TEST_TEAR_DOWN(pswap_destroy)
 
 TEST(pswap_destroy, Destroy)
 {
-	t_pswap *ps = pswap_create(NULL, NULL);
+	t_pswap *ps = pswap_create();
 
 	TEST_ASSERT_NOT_NULL(ps);
 

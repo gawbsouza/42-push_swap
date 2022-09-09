@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:47:35 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 16:54:35 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 09:28:45 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 void	pb(t_pswap *pswap)
 {
-	t_node	*pop;
-
-	if (!pswap || !pswap->a)
+	if (!pswap)
 		return ;
-	pop = stack_pop(pswap->a);
-	if (pop)
-	{
-		if (!pswap->b)
-			pswap->b = stack_create();
-		stack_push(pswap->b, pop->value);
-	}
-	free(pop);
+	if (!pswap->b || !pswap->a)
+		return ;
+	if (pswap->a->size == 0)
+		return ;
+	stack_push(pswap->b, stack_pop(pswap->a));
 }

@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 21:37:52 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/06 22:13:25 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:24:56 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,31 @@ TEST_TEAR_DOWN(stack_swap)
 
 TEST(stack_swap, EmptyStack)
 {
-	TEST_ASSERT_NULL(stack->items);
+	TEST_ASSERT_EQUAL_INT(0, stack->size);
 
 	stack_swap(stack);
-	TEST_ASSERT_NULL(stack->items);
+
+	TEST_ASSERT_EQUAL_INT(0, stack->size);
 }
 
 TEST(stack_swap, OneItem)
 {
 	stack_push(stack, 21);
-	TEST_ASSERT_NOT_NULL(stack->items);
-	TEST_ASSERT_EQUAL_INT(21, stack->items->value);
 
 	stack_swap(stack);
-	TEST_ASSERT_NOT_NULL(stack->items);
-	TEST_ASSERT_EQUAL_INT(21, stack->items->value);
+	
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(stack));
 }
 
 TEST(stack_swap, TwoItems)
 {
 	stack_push(stack, 21);
 	stack_push(stack, 42);
-	TEST_ASSERT_EQUAL_INT(42, stack->items->value);
-	TEST_ASSERT_EQUAL_INT(21, stack->items->next->value);
 
 	stack_swap(stack);
-	TEST_ASSERT_EQUAL_INT(21, stack->items->value);
-	TEST_ASSERT_EQUAL_INT(42, stack->items->next->value);
+
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(stack));
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(stack));
 }
 
 TEST(stack_swap, MultiItems)
@@ -64,14 +62,12 @@ TEST(stack_swap, MultiItems)
 	stack_push(stack, 21);
 	stack_push(stack, 42);
 	stack_push(stack, 64);
-	TEST_ASSERT_EQUAL_INT(64, stack->items->value);
-	TEST_ASSERT_EQUAL_INT(42, stack->items->next->value);
-	TEST_ASSERT_EQUAL_INT(21, stack->items->next->next->value);
-
+	
 	stack_swap(stack);
-	TEST_ASSERT_EQUAL_INT(42, stack->items->value);
-	TEST_ASSERT_EQUAL_INT(64, stack->items->next->value);
-	TEST_ASSERT_EQUAL_INT(21, stack->items->next->next->value);
+	
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(stack));
+	TEST_ASSERT_EQUAL_INT(64, stack_pop(stack));
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(stack));
 }
 
 TEST_GROUP_RUNNER(stack_swap)

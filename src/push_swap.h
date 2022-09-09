@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 17:28:33 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 09:35:50 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@
 
 typedef struct s_node
 {
-	unsigned int	value;
+	int				value;
 	struct s_node	*next;
 }	t_node;
 
 typedef struct s_stack
 {
 	t_node	*items;
+	t_node	*last;
+	size_t	size;
 }	t_stack;
 
 typedef struct s_pswap
@@ -34,12 +36,12 @@ typedef struct s_pswap
 
 t_stack	*stack_create(void);
 void	stack_destroy(t_stack **stack);
-void	stack_push(t_stack *stack, unsigned int value);
-t_node	*stack_pop(t_stack *stack);
+void	stack_push(t_stack *stack, int value);
+int		stack_pop(t_stack *stack);
 void	stack_swap(t_stack *stack);
 void	stack_rotate_up(t_stack *stack);
 void	stack_rotate_down(t_stack *stack);
-t_pswap	*pswap_create(t_stack *a, t_stack *b);
+t_pswap	*pswap_create(void);
 void	pswap_destroy(t_pswap **pswap);
 void	sa(t_pswap *pswap);
 void	sb(t_pswap *pswap);

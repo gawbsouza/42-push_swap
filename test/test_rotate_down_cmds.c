@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:17:28 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 17:39:19 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:17:55 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,59 +15,62 @@
 
 TEST_GROUP(rotate_down_cmds);
 
+static t_pswap *ps;
+
 TEST_SETUP(rotate_down_cmds)
 {
-}
-
-TEST_TEAR_DOWN(rotate_down_cmds)
-{
-}
-
-TEST(rotate_down_cmds, FastTest)
-{
-	t_pswap *ps = pswap_create(stack_create(), stack_create());
+	ps = pswap_create();
 
 	TEST_ASSERT_NOT_NULL(ps);
-	TEST_ASSERT_NOT_NULL(ps->a);
-	TEST_ASSERT_NOT_NULL(ps->b);
 
 	stack_push(ps->a, 21);
 	stack_push(ps->a, 42);
 	stack_push(ps->a, 64);
+
 	stack_push(ps->b, 51);
 	stack_push(ps->b, 102);
 	stack_push(ps->b, 154);
+}
 
-	TEST_ASSERT_EQUAL_INT(64, ps->a->items->value);
-	TEST_ASSERT_EQUAL_INT(42, ps->a->items->next->value);
-	TEST_ASSERT_EQUAL_INT(21, ps->a->items->next->next->value);
-	TEST_ASSERT_EQUAL_INT(154, ps->b->items->value);
-	TEST_ASSERT_EQUAL_INT(102, ps->b->items->next->value);
-	TEST_ASSERT_EQUAL_INT(51, ps->b->items->next->next->value);
-	
+TEST_TEAR_DOWN(rotate_down_cmds)
+{
+	pswap_destroy(&ps);
+}
+
+TEST(rotate_down_cmds, rra)
+{
 	rra(ps);
+	
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(64, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(ps->a));
+}
+
+TEST(rotate_down_cmds, rrb)
+{
 	rrb(ps);
 
-	TEST_ASSERT_EQUAL_INT(21, ps->a->items->value);
-	TEST_ASSERT_EQUAL_INT(64, ps->a->items->next->value);
-	TEST_ASSERT_EQUAL_INT(42, ps->a->items->next->next->value);
-	TEST_ASSERT_EQUAL_INT(51, ps->b->items->value);
-	TEST_ASSERT_EQUAL_INT(154, ps->b->items->next->value);
-	TEST_ASSERT_EQUAL_INT(102, ps->b->items->next->next->value);
+	TEST_ASSERT_EQUAL_INT(51, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(154, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(102, stack_pop(ps->b));
+}
 
+TEST(rotate_down_cmds, rrr)
+{
 	rrr(ps);
 
-	TEST_ASSERT_EQUAL_INT(42, ps->a->items->value);
-	TEST_ASSERT_EQUAL_INT(21, ps->a->items->next->value);
-	TEST_ASSERT_EQUAL_INT(64, ps->a->items->next->next->value);
-	TEST_ASSERT_EQUAL_INT(102, ps->b->items->value);
-	TEST_ASSERT_EQUAL_INT(51, ps->b->items->next->value);
-	TEST_ASSERT_EQUAL_INT(154, ps->b->items->next->next->value);
-	
-	pswap_destroy(&ps);
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(64, stack_pop(ps->a));
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(ps->a));
+
+	TEST_ASSERT_EQUAL_INT(51, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(154, stack_pop(ps->b));
+	TEST_ASSERT_EQUAL_INT(102, stack_pop(ps->b));
 }
 
 TEST_GROUP_RUNNER(rotate_down_cmds)
 {
-	RUN_TEST_CASE(rotate_down_cmds, FastTest);
+	RUN_TEST_CASE(rotate_down_cmds, rra);
+	RUN_TEST_CASE(rotate_down_cmds, rrb);
+	RUN_TEST_CASE(rotate_down_cmds, rrr);
 }
