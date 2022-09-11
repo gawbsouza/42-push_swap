@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:55:50 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/11 13:53:48 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/11 19:03:35 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	pswap_sort_playback(t_pswap *pswap, const char *moves)
 		free(moves_array[index]);
 		index++;
 	}
+	free(moves_array);
 }
 
 static void	execute_move(t_pswap *pswap, char *move)
