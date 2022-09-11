@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/11 08:32:49 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/11 12:30:18 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	rrb(t_pswap *pswap);
 void	rrr(t_pswap *pswap);
 void	add_msg_to_log(char *msg, char **log);
 void	move_n_items_from_a(t_pswap *pswap, size_t n, char **log);
+void	pswap_sort_playback(t_pswap *pswap, const char *moves);
 
 #endif
