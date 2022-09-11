@@ -6,7 +6,7 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 16:26:12 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/06 09:16:50 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/09 16:29:36 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ TEST_SRC	+= $(wildcard *.c)
 TEST_INC	+= -I../lib/Unity/src
 TEST_INC	+= -I../lib/Unity/extras/fixture/src
 TEST_INC	+= -I../src
+TEST_INC	+= -I../lib/libft
+
+TEST_LIB	+= -L../lib/libft -lft
 
 # Projects objs
 PROJ_SRC	= $(filter-out main.c, $(wildcard ../src/*.c)) 
@@ -36,14 +39,14 @@ PROJ_OBJ	= $(PROJ_SRC:.c=.o)
 all: $(RUNNER) 
 
 $(PROJ_OBJ):
-	make -C .. $(subst ../, ,$@)
+	@make --no-print-directory -C .. $(subst ../, ,$@)
 
 clean_proj:
-	make -C .. clean
+	@make -C .. clean
 
 # Compile source code
 $(RUNNER): clean_proj $(PROJ_OBJ) $(TEST_SRC) $(BUILD_DIR) 
-	$(CC) $(CFLAGS) $(TEST_INC) $(PROJ_OBJ) $(TEST_SRC) -o $(BUILD_DIR)/$(NAME)
+	$(CC) $(CFLAGS) $(TEST_INC) $(PROJ_OBJ) $(TEST_SRC) $(TEST_LIB) -o $(BUILD_DIR)/$(NAME)
 
 # Make 'build' directory
 $(BUILD_DIR): 

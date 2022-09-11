@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:00:45 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/07 17:36:25 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/11 07:53:03 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static	void	runAllTests(void)
 	RUN_TEST_GROUP(pb);
 	RUN_TEST_GROUP(rotate_up_cmds);
 	RUN_TEST_GROUP(rotate_down_cmds);
+	RUN_TEST_GROUP(pswap_sort);
+	RUN_TEST_GROUP(stack_pos_ordered);
+	RUN_TEST_GROUP(move_n_items_from_a);
+	RUN_TEST_GROUP(add_msg_to_log);
 }
 
 int	main(int argc, const char **argv)
