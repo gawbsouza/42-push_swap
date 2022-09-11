@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:45:47 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/11 07:38:36 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/11 09:13:01 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@ TEST_GROUP(pswap_sort);
 
 static t_pswap *ps;
 static char *sort_log;
-
-static int is_ordered(t_stack *stack)
-{
-	t_node *item;
-
-	if (!stack)
-		return (-1);
-
-	item = stack->items;
-	while (item->next)
-	{
-		if (item->value > item->next->value)
-			return (0);
-		item = item->next;
-	}
-
-	return (1);
-}
-
 
 TEST_SETUP(pswap_sort)
 {
@@ -63,7 +44,7 @@ TEST(pswap_sort, StackWithOneItem)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_NULL(sort_log);
-	TEST_ASSERT_EQUAL_INT(1, stack_pop(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithTwoOrderedItems)
@@ -75,7 +56,7 @@ TEST(pswap_sort, StackWithTwoOrderedItems)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_NULL(sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithTwoUnorderedItems)
@@ -87,7 +68,7 @@ TEST(pswap_sort, StackWithTwoUnorderedItems)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithThreeOrderedItems)
@@ -100,7 +81,7 @@ TEST(pswap_sort, StackWithThreeOrderedItems)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_NULL(sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithThreeUnorderedItems_case1)
@@ -113,7 +94,7 @@ TEST(pswap_sort, StackWithThreeUnorderedItems_case1)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithThreeUnorderedItems_case2)
@@ -126,7 +107,7 @@ TEST(pswap_sort, StackWithThreeUnorderedItems_case2)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\nsa\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithThreeUnorderedItems_case3)
@@ -139,7 +120,7 @@ TEST(pswap_sort, StackWithThreeUnorderedItems_case3)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("sa\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithFourOrderedItems)
@@ -153,7 +134,7 @@ TEST(pswap_sort, StackWithFourOrderedItems)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_NULL(sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithFourUnorderedItems_case1)
@@ -167,7 +148,7 @@ TEST(pswap_sort, StackWithFourUnorderedItems_case1)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithFourUnorderedItems_case2)
@@ -181,7 +162,7 @@ TEST(pswap_sort, StackWithFourUnorderedItems_case2)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\nsa\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithFourUnorderedItems_case3)
@@ -195,7 +176,7 @@ TEST(pswap_sort, StackWithFourUnorderedItems_case3)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\nsa\npb\nsa\npa\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithFiveUnorderedItems_case1)
@@ -210,7 +191,7 @@ TEST(pswap_sort, StackWithFiveUnorderedItems_case1)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("pb\nra\npa\npb\npb\nsa\npa\npa\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST(pswap_sort, StackWithFiveUnorderedItems_case2)
@@ -225,7 +206,7 @@ TEST(pswap_sort, StackWithFiveUnorderedItems_case2)
 	sort_log = pswap_sort(ps);
 
 	TEST_ASSERT_EQUAL_STRING("ra\nsa\npb\nsa\npa\nsa\npb\npb\nsa\npa\nsa\npa\nsa\n", sort_log);
-	TEST_ASSERT_EQUAL_INT(1, is_ordered(ps->a));
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
 TEST_GROUP_RUNNER(pswap_sort)
