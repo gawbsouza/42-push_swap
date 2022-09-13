@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 09:17:50 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/11 13:51:28 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/13 10:36:17 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,45 @@ TEST(pswap_sort_playback, RrrMove)
 	TEST_ASSERT_EQUAL_INT(102, stack_pop(pswap->b));
 }
 
-TEST(pswap_sort_playback, MultiplesMoves)
+TEST(pswap_sort_playback, MultiMoves_case1)
+{
+	stack_push(pswap->a, 64);
+	stack_push(pswap->a, 42);
+	stack_push(pswap->a, 21);
+
+	TEST_ASSERT_EQUAL_INT(3, pswap->a->size);
+	TEST_ASSERT_EQUAL_INT(0, pswap->b->size);
+
+	pswap_sort_playback(pswap, "sa\nra\nsa\nrra\n");
+	
+	TEST_ASSERT_EQUAL_INT(3, pswap->a->size);
+	TEST_ASSERT_EQUAL_INT(0, pswap->b->size);
+
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(pswap->a));
+	TEST_ASSERT_EQUAL_INT(64, stack_pop(pswap->a));
+	TEST_ASSERT_EQUAL_INT(21, stack_pop(pswap->a));
+}
+
+TEST(pswap_sort_playback, MultiMoves_case2)
+{
+	stack_push(pswap->b, 154);
+	stack_push(pswap->b, 102);
+	stack_push(pswap->b, 51);
+
+	TEST_ASSERT_EQUAL_INT(0, pswap->a->size);
+	TEST_ASSERT_EQUAL_INT(3, pswap->b->size);
+
+	pswap_sort_playback(pswap, "sb\nrb\nsb\nrrb\n");
+	
+	TEST_ASSERT_EQUAL_INT(0, pswap->a->size);
+	TEST_ASSERT_EQUAL_INT(3, pswap->b->size);
+	
+	TEST_ASSERT_EQUAL_INT(102, stack_pop(pswap->b));
+	TEST_ASSERT_EQUAL_INT(154, stack_pop(pswap->b));
+	TEST_ASSERT_EQUAL_INT(51, stack_pop(pswap->b));
+}
+
+TEST(pswap_sort_playback, MultiMoves_case3)
 {
 	stack_push(pswap->a, 64);
 	stack_push(pswap->a, 42);
@@ -277,20 +315,18 @@ TEST(pswap_sort_playback, MultiplesMoves)
 	TEST_ASSERT_EQUAL_INT(3, pswap->a->size);
 	TEST_ASSERT_EQUAL_INT(3, pswap->b->size);
 
-	pswap_sort_playback(pswap, "sa\nra\nsa\nrra\n");
-	pswap_sort_playback(pswap, "sb\nrb\nsb\nrrb\n");
 	pswap_sort_playback(pswap, "rr\nss\nrrr\n");
 	
 	TEST_ASSERT_EQUAL_INT(3, pswap->a->size);
 	TEST_ASSERT_EQUAL_INT(3, pswap->b->size);
 
-	TEST_ASSERT_EQUAL_INT(42, stack_pop(pswap->a));
 	TEST_ASSERT_EQUAL_INT(21, stack_pop(pswap->a));
 	TEST_ASSERT_EQUAL_INT(64, stack_pop(pswap->a));
+	TEST_ASSERT_EQUAL_INT(42, stack_pop(pswap->a));
 	
-	TEST_ASSERT_EQUAL_INT(102, stack_pop(pswap->b));
 	TEST_ASSERT_EQUAL_INT(51, stack_pop(pswap->b));
 	TEST_ASSERT_EQUAL_INT(154, stack_pop(pswap->b));
+	TEST_ASSERT_EQUAL_INT(102, stack_pop(pswap->b));
 }
 
 TEST_GROUP_RUNNER(pswap_sort_playback)
@@ -307,5 +343,7 @@ TEST_GROUP_RUNNER(pswap_sort_playback)
 	RUN_TEST_CASE(pswap_sort_playback, RraMove);
 	RUN_TEST_CASE(pswap_sort_playback, RrbMove);
 	RUN_TEST_CASE(pswap_sort_playback, RrrMove);
-	RUN_TEST_CASE(pswap_sort_playback, MultiplesMoves);
+	RUN_TEST_CASE(pswap_sort_playback, MultiMoves_case1);
+	RUN_TEST_CASE(pswap_sort_playback, MultiMoves_case2);
+	RUN_TEST_CASE(pswap_sort_playback, MultiMoves_case3);
 }
