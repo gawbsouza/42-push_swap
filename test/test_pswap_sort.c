@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:45:47 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/11 09:13:01 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/13 11:06:59 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,41 @@ TEST(pswap_sort, StackWithFiveUnorderedItems_case2)
 	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
 }
 
+TEST(pswap_sort, StackWithSixUnorderedItems)
+{
+	stack_push(ps->a, 3);
+	stack_push(ps->a, 2);
+	stack_push(ps->a, 5);
+	stack_push(ps->a, 1);
+	stack_push(ps->a, 6);
+	stack_push(ps->a, 4);
+
+	// 4 6 1 5 2 3
+	sort_log = pswap_sort(ps);
+
+	TEST_ASSERT_EQUAL_STRING("pb\nra\npa\nsa\npb\npb\nsa\npa\nsa\npa\npb\npb\npb\nsa\npa\nsa\npa\npa\n", sort_log);
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
+}
+
+TEST(pswap_sort, StackWithTenUnorderedItems)
+{
+	stack_push(ps->a, 9);
+	stack_push(ps->a, 8);
+	stack_push(ps->a, 10);
+	stack_push(ps->a, 3);
+	stack_push(ps->a, 2);
+	stack_push(ps->a, 5);
+	stack_push(ps->a, 1);
+	stack_push(ps->a, 6);
+	stack_push(ps->a, 4);
+	stack_push(ps->a, 7);
+
+	// 7 4 6 1 5 2 3 10 8 9
+	sort_log = pswap_sort(ps);
+
+	TEST_ASSERT_TRUE(stack_is_ordered(ps->a));
+}
+
 TEST_GROUP_RUNNER(pswap_sort)
 {
 	RUN_TEST_CASE(pswap_sort, EmptyStacks);
@@ -225,4 +260,7 @@ TEST_GROUP_RUNNER(pswap_sort)
 	RUN_TEST_CASE(pswap_sort, StackWithFourUnorderedItems_case3);
 	RUN_TEST_CASE(pswap_sort, StackWithFiveUnorderedItems_case1);
 	RUN_TEST_CASE(pswap_sort, StackWithFiveUnorderedItems_case2);
+	RUN_TEST_CASE(pswap_sort, StackWithSixUnorderedItems);
+	RUN_TEST_CASE(pswap_sort, StackWithTenUnorderedItems);
 }
+
