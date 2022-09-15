@@ -6,10 +6,11 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:47:51 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/14 23:19:50 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/15 10:33:58 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME		= push_swap
 SRC_D		= ./src
 SRCS		+= stack_create.c stack_destroy.c stack_push.c stack_pop.c
 SRCS		+= stack_swap.c stack_rotate_up.c stack_rotate_down.c
@@ -30,6 +31,11 @@ CFLAGS		= -g -Wall -Werror -Wextra
 
 CLEANUP		= rm -rf
 
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(LINKER) $(CFLAGS) $^ $(LIBS) -o $@
+
 .PHONY: libft
 libft:
 	@make --no-print-directory -C lib/libft
@@ -40,3 +46,8 @@ libft:
 .PHONY: clean
 clean:
 	$(CLEANUP) $(OBJS)
+
+fclean: clean
+	$(CLEANUP) $(NAME)
+
+re: fclean all
