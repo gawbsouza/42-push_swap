@@ -6,7 +6,7 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:47:51 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/14 22:48:52 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/14 23:19:50 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS		+= pswap_create.c pswap_destroy.c sa.c sb.c ss.c pa.c pb.c
 SRCS		+= ra.c rb.c rr.c rra.c rrb.c rrr.c pswap_sort.c
 SRCS		+= stack_pos_ordered.c move_n_items_from_a.c add_msg_to_log.c
 SRCS		+= stack_is_ordered.c pswap_sort_playback.c has_duplicate_strings.c
+SRCS		+= has_only_integers.c
 
 OBJS		= $(addprefix $(SRC_D)/, $(SRCS:.c=.o)) 
 

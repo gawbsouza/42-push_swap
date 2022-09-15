@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:10:40 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/14 22:53:37 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/14 23:16:58 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	add_msg_to_log(char *msg, char **log);
 void	move_n_items_from_a(t_pswap *pswap, size_t n, char **log);
 void	pswap_sort_playback(t_pswap *pswap, const char *moves);
 int		has_duplicate_strings(char *const *list, size_t size);
+int		has_only_integers(char *const *list, size_t size);
 
 #endif
