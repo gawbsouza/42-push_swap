@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 23:39:27 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/15 11:24:30 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/16 02:18:00 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 	if (result)
 		ft_putstr_fd(result, 1);
 	pswap_destroy(&pswap);
+	free(result);
 	return (0);
 }
 

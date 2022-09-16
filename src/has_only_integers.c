@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 23:09:03 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/15 10:33:16 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/16 02:15:13 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	is_overflow(const char *str)
 {
 	int		num;
 	char	*num_str;
+	int		result;
 
 	if (!str)
 		return (0);
@@ -61,7 +62,7 @@ static int	is_overflow(const char *str)
 		return (0);
 	num = ft_atoi(str);
 	num_str = ft_itoa(num);
-	if (ft_strncmp(str, num_str, ft_strlen(num_str) + 1) == 0)
-		return (0);
-	return (1);
+	result = (ft_strncmp(str, num_str, ft_strlen(num_str) + 1) != 0);
+	free(num_str);
+	return (result);
 }
