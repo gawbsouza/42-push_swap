@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:00:45 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/14 23:19:50 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/15 22:28:14 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static	void	runAllTests(void)
 	RUN_TEST_GROUP(pswap_sort_playback);
 	RUN_TEST_GROUP(has_duplicate_strings);
 	RUN_TEST_GROUP(has_only_integers);
+	RUN_TEST_GROUP(is_valid_move);
 }
 
 int	main(int argc, const char **argv)

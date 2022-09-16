@@ -6,7 +6,7 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 16:26:12 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/15 09:43:55 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/15 22:28:36 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ TEST_INC	+= -I../lib/libft
 TEST_LIB	+= -L../lib/libft -lft
 
 # Projects objs
-PROJ_SRC	= $(filter-out %push_swap.c, $(wildcard ../src/*.c)) 
+PROJ_SRC	= $(filter-out %push_swap.c %checker.c, $(wildcard ../src/*.c)) 
 PROJ_OBJ	= $(PROJ_SRC:.c=.o)
 
 # Default ruler
