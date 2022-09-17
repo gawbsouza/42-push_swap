@@ -6,7 +6,7 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:47:51 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/17 00:56:38 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/17 11:20:15 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS		+= ra.c rb.c rr.c rra.c rrb.c rrr.c pswap_sort.c
 SRCS		+= stack_pos_ordered.c move_n_items_from_a.c add_msg_to_log.c
 SRCS		+= stack_is_ordered.c pswap_sort_playback.c has_duplicate_strings.c
 SRCS		+= has_only_integers.c is_valid_args.c is_valid_move.c 
-SRCS		+= is_str_equals.c raddix_sort.c gabs_sort.c
+SRCS		+= is_str_equals.c raddix_sort.c gabs_sort.c selection_sort.c
+SRCS		+= simplify_input.c
 
 SRCS_N		+= push_swap.c
 SRCS_B		+= checker.c
