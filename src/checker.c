@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 21:25:01 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/16 08:14:09 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/17 13:06:21 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,24 @@ int	main(int argc, char **argv)
 
 static int	read_play_log(char **play_log)
 {
-	char	buffer[1024];
+	char	*line;
 	char	*move;
-	ssize_t	buflen;
 
-	buflen = read(1, buffer, 1024);
-	while (buflen > 0)
+	line = get_next_line(0);
+	while (line)
 	{
-		buffer[buflen - 1] = '\0';
-		add_msg_to_log(buffer, play_log);
-		move = ft_strtrim(buffer, "\n");
+		move = ft_strtrim(line, "\n");
 		if (!is_valid_move(move))
 		{
 			free(move);
+			free(line);
 			return (0);
 		}
+		add_msg_to_log(line, play_log);
 		free(move);
-		buflen = read(1, buffer, 1024);
+		free(line);
+		line = get_next_line(0);
 	}
-	if (buflen == -1)
-		return (0);
 	return (1);
 }
 

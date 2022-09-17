@@ -6,7 +6,7 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:47:51 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/17 11:20:15 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/17 12:47:15 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,11 @@ LIBFT_I		= -I$(LIBFT_D)
 LIBFT_L		= -L$(LIBFT_D) -lft
 LIBFT_A		= $(LIBFT_D)/libft.a
 
+GNL_D		= lib/gnl
+GNL_I		= -I$(GNL_D)
+GNL_L		= -L$(GNL_D) -lgnl
+GNL_A		= $(GNL_D)/libgnl.a
+
 LINKER		= gcc
 COMPILER	= gcc -c
 CFLAGS		= -g -Wall -Werror -Wextra
@@ -49,12 +54,12 @@ bonus: $(BONUS)
 
 $(NAME): $(OBJS)
 	@printf "compiling $(NAME) ... \t\t"
-	@$(LINKER) $(CFLAGS) $^ $(LIBFT_L) -o $@
+	@$(LINKER) $(CFLAGS) $^ $(LIBFT_L) $(GNL_L) -o $@
 	@echo OK!
 
 $(BONUS): $(OBJS_B)
 	@printf "compiling $(BONUS) ... \t\t\t"
-	@$(LINKER) $(CFLAGS) $^ $(LIBFT_L) -o $@
+	@$(LINKER) $(CFLAGS) $^ $(LIBFT_L) $(GNL_L) -o $@
 	@echo OK!
 
 $(LIBFT_A):
@@ -62,8 +67,13 @@ $(LIBFT_A):
 	@make -s -C $(LIBFT_D)
 	@echo OK!
 
-%.o: %.c $(LIBFT_A)
-	@$(COMPILER) $(CFLAGS) $(LIBFT_I) $< -o $@
+$(GNL_A):
+	@printf "compiling gnl ... \t\t\t"
+	@make -s -C $(GNL_D)
+	@echo OK!
+
+%.o: %.c $(LIBFT_A) $(GNL_A)
+	@$(COMPILER) $(CFLAGS) $(LIBFT_I) $(GNL_I) $< -o $@
 
 .PHONY: clean
 clean:
@@ -76,6 +86,9 @@ clean:
 	@printf "cleaning libft objects ... \t\t"
 	@make -s -C $(LIBFT_D) clean
 	@echo OK!
+	@printf "cleaning gnl objects ... \t\t"
+	@make -s -C $(GNL_D) clean
+	@echo OK!
 
 .PHONY: fclean
 fclean: clean
@@ -87,6 +100,9 @@ fclean: clean
 	@echo OK!
 	@printf "cleaning libft static library ... \t"
 	@make -s -C $(LIBFT_D) fclean
+	@echo OK!
+	@printf "cleaning gnl static library ... \t"
+	@make -s -C $(GNL_D) fclean
 	@echo OK!
 
 .PHONY: re

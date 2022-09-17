@@ -6,7 +6,7 @@
 #    By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 16:26:12 by gasouza           #+#    #+#              #
-#    Updated: 2022/09/15 22:28:36 by gasouza          ###   ########.fr        #
+#    Updated: 2022/09/17 13:09:44 by gasouza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ TEST_INC	+= -I../lib/Unity/src
 TEST_INC	+= -I../lib/Unity/extras/fixture/src
 TEST_INC	+= -I../src
 TEST_INC	+= -I../lib/libft
+TEST_INC	+= -I../lib/gnl
 
 TEST_LIB	+= -L../lib/libft -lft
+TEST_LIB	+= -L../lib/gnl -lgnl
 
 # Projects objs
 PROJ_SRC	= $(filter-out %push_swap.c %checker.c, $(wildcard ../src/*.c)) 
