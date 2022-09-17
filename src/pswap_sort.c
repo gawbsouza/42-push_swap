@@ -6,81 +6,78 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:05:39 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/11 10:19:36 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/17 00:35:18 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	try_rotate_up_a(t_pswap *pswap, char **log);
-static void	try_swap_a(t_pswap *pswap, char **log);
-static void	move_all_items_from_b_ordered(t_pswap *pswap, char **log);
+static int	max_bits_to_shift(t_pswap *pswap);
+static void	raddix_sort(t_pswap *pswap, char **log);
+static void	radix_loop(t_pswap *pswap, int shift, char **log);
 
 char	*pswap_sort(t_pswap *pswap)
 {
 	char	*log;
-	size_t	sentinel;
-	size_t	size;
 
+	if (!pswap || stack_is_ordered(pswap->a))
+		return (NULL);
 	log = NULL;
-	if (!pswap)
-		return (log);
-	sentinel = 1;
-	size = pswap->a->size;
-	while (sentinel <= size)
-	{
-		if (!stack_pos_ordered(pswap->a, sentinel))
-		{
-			move_n_items_from_a(pswap, sentinel - 1, &log);
-			try_rotate_up_a(pswap, &log);
-			try_swap_a(pswap, &log);
-			move_all_items_from_b_ordered(pswap, &log);
-		}
-		sentinel++;
-	}
+	raddix_sort(pswap, &log);
 	return (log);
 }
 
-static void	try_rotate_up_a(t_pswap *pswap, char **log)
+static void	raddix_sort(t_pswap *pswap, char **log)
 {
-	t_node	*first;
-	t_node	*last;
+	int	max_bits;
+	int	shift;
 
-	if (!pswap || !log)
-		return ;
-	first = pswap->a->items;
-	last = pswap->a->last;
-	if (first->value > last->value)
+	max_bits = max_bits_to_shift(pswap);
+	shift = 0;
+	while (shift < max_bits)
 	{
-		ra(pswap);
-		add_msg_to_log("ra\n", log);
+		radix_loop(pswap, shift, log);
+		shift++;
 	}
 }
 
-static void	try_swap_a(t_pswap *pswap, char **log)
+static int	max_bits_to_shift(t_pswap *pswap)
 {
-	t_node	*first;
-	t_node	*second;
+	int	max_num;
+	int	max_bits;
 
-	if (!pswap || !log)
-		return ;
-	first = pswap->a->items;
-	second = first->next;
-	if (second && first->value > second->value)
-	{
-		sa(pswap);
-		add_msg_to_log("sa\n", log);
-	}
+	if (!pswap)
+		return (0);
+	max_num = pswap->a->size;
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
 }
 
-static void	move_all_items_from_b_ordered(t_pswap *pswap, char **log)
+static void	radix_loop(t_pswap *pswap, int shift, char **log)
 {
+	int	size;
+	int	i;
+
 	if (!pswap || !log)
 		return ;
+	size = pswap->a->size;
+	i = 0;
+	while (i++ < size)
+	{
+		if (((pswap->a->items->value >> shift) & 1) == 1)
+		{
+			ra(pswap);
+			add_msg_to_log("ra\n", log);
+			continue ;
+		}
+		pb(pswap);
+		add_msg_to_log("pb\n", log);
+	}
 	while (pswap->b->size)
 	{
 		pa(pswap);
 		add_msg_to_log("pa\n", log);
-		try_swap_a(pswap, log);
 	}
 }
