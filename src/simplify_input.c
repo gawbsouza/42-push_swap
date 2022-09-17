@@ -6,7 +6,7 @@
 /*   By: gasouza <gasouza@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:44:12 by gasouza           #+#    #+#             */
-/*   Updated: 2022/09/17 11:26:08 by gasouza          ###   ########.fr       */
+/*   Updated: 2022/09/17 16:42:59 by gasouza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	*simplify_input(char **arr, int size)
 
 	input = str_arr_to_int_arr(arr, size);
 	copy = str_arr_to_int_arr(arr, size);
+	result = NULL;
 	if (input && copy)
 	{
 		selection_sort(input, size);
